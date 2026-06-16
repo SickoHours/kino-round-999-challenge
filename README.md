@@ -4,26 +4,77 @@ Plutonium T5 Zombies mod for Black Ops 1 Kino der Toten.
 
 This seeds Kino into a high-round challenge state without god mode, noclip, external software, or a mod menu. It is meant for testing and playing the round normally from that state.
 
-## Install
+## Install From GitHub
 
-1. Open:
+1. Download the repository:
+
+   - Click the green `Code` button on GitHub.
+   - Click `Download ZIP`.
+   - Extract the ZIP somewhere temporary, such as your Downloads folder.
+
+2. Open your Plutonium T5 mods folder:
 
 ```text
 %localappdata%\Plutonium\storage\t5\mods
 ```
 
-2. Copy this repository folder as `999`, so the final script path is:
+3. Create or replace this folder:
+
+```text
+%localappdata%\Plutonium\storage\t5\mods\999
+```
+
+4. Copy this repository's files into that `999` folder.
+
+The final layout must look like this:
+
+```text
+%localappdata%\Plutonium\storage\t5\mods\999
+|-- README.md
+|-- scripts
+    |-- sp
+        |-- zom
+            |-- kino_round_999_challenge.gsc
+```
+
+The most important path is:
 
 ```text
 %localappdata%\Plutonium\storage\t5\mods\999\scripts\sp\zom\kino_round_999_challenge.gsc
 ```
 
-3. Start Plutonium T5 Zombies, load the `999` mod, and launch Kino der Toten.
+Do not leave the files nested like this:
 
-4. If you are already in-game after changing the script, run:
+```text
+%localappdata%\Plutonium\storage\t5\mods\999\kino-round-999-challenge-main\scripts\...
+```
+
+If you see that extra `kino-round-999-challenge-main` folder, move its contents up into `mods\999`.
+
+5. Start Plutonium T5 Zombies.
+
+6. Load the `999` mod from the T5 Zombies mod menu, then launch Kino der Toten.
+
+7. If you are already in-game after changing the script, run:
 
 ```text
 map_restart
+```
+
+If the mod was already loaded and you only updated the script, `fast_restart` is usually enough. If the change does not appear, use `map_restart` or reload the `999` mod from the menu.
+
+## Update An Existing Install
+
+To update an existing `999` install, replace this file:
+
+```text
+%localappdata%\Plutonium\storage\t5\mods\999\scripts\sp\zom\kino_round_999_challenge.gsc
+```
+
+Then restart Kino with:
+
+```text
+fast_restart
 ```
 
 ## What It Changes
