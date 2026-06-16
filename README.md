@@ -23,14 +23,14 @@ packages
 |   |-- scripts
 |       |-- sp
 |           |-- zom
-|               |-- kino_round_999_challenge.gsc
+|               |-- kino_round_999_base_challenge.gsc
 |
 |-- 999_m14_thundergun
     |-- README.md
     |-- scripts
         |-- sp
             |-- zom
-                |-- kino_round_999_challenge.gsc
+                |-- kino_round_999_m14_thundergun_challenge.gsc
 ```
 
 ## Pick One Package
@@ -52,13 +52,14 @@ The package folder names are the mod names:
 999_m14_thundergun
 ```
 
-Both packages use the same script filename:
+Each package uses a versioned script filename:
 
 ```text
-kino_round_999_challenge.gsc
+kino_round_999_base_challenge.gsc
+kino_round_999_m14_thundergun_challenge.gsc
 ```
 
-That is expected. Only install one package at a time unless you are using the mod menu folders.
+That makes it easier to see which version is installed. Only install one package at a time unless you are using the mod menu folders.
 
 ## Easiest Install: Loose Scripts
 
@@ -75,7 +76,11 @@ Use this if you want the script to load automatically when you launch Kino.
 3. The final path must be:
 
 ```text
-%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+Base:
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_base_challenge.gsc
+
+M14 Thunder Gun:
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_m14_thundergun_challenge.gsc
 ```
 
 4. Launch Plutonium T5 Zombies and start Kino der Toten normally.
@@ -129,12 +134,13 @@ Use one install method at a time.
 Do not keep this loose script active:
 
 ```text
-%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_base_challenge.gsc
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_m14_thundergun_challenge.gsc
 ```
 
 while also loading `999` or `999_m14_thundergun` from the mod menu.
 
-Also do not install both packages into the loose scripts folder at the same time. They use the same final filename, so only one can be active there.
+Also do not install both packages into the loose scripts folder at the same time. The filenames are different now, but both scripts change the same round setup, so keep only the one you want active.
 
 Do not copy the whole `kino-round-999-challenge-main` download folder into `mods`. Open `packages` first, then copy only `999` or `999_m14_thundergun`.
 

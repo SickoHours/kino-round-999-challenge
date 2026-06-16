@@ -4,9 +4,9 @@
 // Kino Round 999 Challenge for Plutonium T5 Zombies.
 // M14 Thunder Gun variation.
 // Mod-folder install:
-// %localappdata%\Plutonium\storage\t5\mods\999_m14_thundergun\scripts\sp\zom\kino_round_999_challenge.gsc
+// %localappdata%\Plutonium\storage\t5\mods\999_m14_thundergun\scripts\sp\zom\kino_round_999_m14_thundergun_challenge.gsc
 // Loose-script install:
-// %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+// %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_m14_thundergun_challenge.gsc
 
 init()
 {

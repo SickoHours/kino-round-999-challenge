@@ -26,7 +26,7 @@ into:
 Final file:
 
 ```text
-%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_m14_thundergun_challenge.gsc
 ```
 
 Launch Kino normally. You do not need to load a mod from the mod menu.
@@ -60,7 +60,8 @@ Use either loose scripts or the mod menu folder, not both at the same time.
 If another version already exists here, replace it:
 
 ```text
-%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_base_challenge.gsc
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_m14_thundergun_challenge.gsc
 ```
 
 ## Dvars

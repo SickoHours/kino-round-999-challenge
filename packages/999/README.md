@@ -26,7 +26,7 @@ into:
 Final file:
 
 ```text
-%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_base_challenge.gsc
 ```
 
 Launch Kino normally.
@@ -56,3 +56,5 @@ Load `999` from the Plutonium T5 Zombies mod menu, then launch Kino.
 ## Important
 
 Use either loose scripts or the mod menu folder, not both at the same time.
+
+Do not run this base script at the same time as `kino_round_999_m14_thundergun_challenge.gsc`.

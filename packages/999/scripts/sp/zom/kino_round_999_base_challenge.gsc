@@ -3,9 +3,9 @@
 
 // Kino Round 999 Challenge for Plutonium T5 Zombies.
 // Mod-folder install:
-// %localappdata%\Plutonium\storage\t5\mods\999\scripts\sp\zom\kino_round_999_challenge.gsc
+// %localappdata%\Plutonium\storage\t5\mods\999\scripts\sp\zom\kino_round_999_base_challenge.gsc
 // Loose-script install:
-// %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+// %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_base_challenge.gsc
 
 init()
 {
