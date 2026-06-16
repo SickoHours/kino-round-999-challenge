@@ -2,135 +2,131 @@
 
 Plutonium T5 Zombies scripts for Black Ops 1 Kino der Toten.
 
-This starts Kino in a high-round challenge state without god mode, noclip, or external software. You play the round normally from that state.
+This repo is organized around install-ready packages. Pick one package, copy it, and play.
 
-## Pick A Version
+## What To Download
 
-There are two versions in this repo:
+Click `Code` -> `Download ZIP`, then extract the ZIP.
+
+Inside the extracted folder, open:
 
 ```text
-Base round 999 challenge:
-scripts\sp\zom\kino_round_999_challenge.gsc
-
-M14 Thunder Gun variation:
-variants\m14-thundergun\scripts\sp\zom\kino_round_999_challenge.gsc
+packages
 ```
 
-The base version gives round 999, 1,000,000 points, and a live zombie counter.
+You will see:
 
-The M14 Thunder Gun variation does all of that, plus buying/acquiring the spawn-room M14 on Kino immediately swaps it into the Thunder Gun.
+```text
+packages
+|-- 999
+|   |-- README.md
+|   |-- scripts
+|       |-- sp
+|           |-- zom
+|               |-- kino_round_999_challenge.gsc
+|
+|-- 999_m14_thundergun
+    |-- README.md
+    |-- scripts
+        |-- sp
+            |-- zom
+                |-- kino_round_999_challenge.gsc
+```
 
-## Best Install: Loose Scripts Folder
+## Pick One Package
 
-Use this if you want the script to load without selecting a mod from the Plutonium mod menu.
+`999`
 
-1. Download this repo from GitHub:
+Base round 999 challenge. Starts Kino on round 999, gives 1,000,000 points, and shows a live zombie counter.
 
-   - Click `Code`.
-   - Click `Download ZIP`.
-   - Extract the ZIP.
+`999_m14_thundergun`
 
-2. Open your Plutonium T5 storage folder:
+Everything from `999`, plus buying/acquiring the spawn-room M14 immediately gives you the Thunder Gun.
+
+## File Names
+
+The package folder names are the mod names:
+
+```text
+999
+999_m14_thundergun
+```
+
+Both packages use the same script filename:
+
+```text
+kino_round_999_challenge.gsc
+```
+
+That is expected. Only install one package at a time unless you are using the mod menu folders.
+
+## Easiest Install: Loose Scripts
+
+Use this if you want the script to load automatically when you launch Kino.
+
+1. Choose one package: `999` or `999_m14_thundergun`.
+
+2. Copy that package's `scripts` folder into:
 
 ```text
 %localappdata%\Plutonium\storage\t5
 ```
 
-3. Choose one version.
-
-For the base version, copy this repo folder:
-
-```text
-scripts
-```
-
-into:
-
-```text
-%localappdata%\Plutonium\storage\t5
-```
-
-For the M14 Thunder Gun variation, copy this folder:
-
-```text
-variants\m14-thundergun\scripts
-```
-
-into:
-
-```text
-%localappdata%\Plutonium\storage\t5
-```
-
-4. The final loose-script file must be here:
+3. The final path must be:
 
 ```text
 %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
 ```
 
-5. Start Plutonium T5 Zombies and launch Kino der Toten normally.
+4. Launch Plutonium T5 Zombies and start Kino der Toten normally.
 
-You do not need to load a mod from the mod menu when using the loose scripts folder.
+You do not need to load anything from the mod menu with this install method.
 
 ## Mod Menu Install
 
-Use this if you prefer loading the script as a named Plutonium mod.
+Use this if you want to select the mod from the Plutonium T5 Zombies mod menu.
 
-1. Open your Plutonium T5 mods folder:
+1. Open:
 
 ```text
 %localappdata%\Plutonium\storage\t5\mods
 ```
 
-2. Create one folder for the version you want:
+2. Copy one whole package folder into `mods`.
+
+For the base version, copy:
 
 ```text
-Base version:
-%localappdata%\Plutonium\storage\t5\mods\999
-
-M14 Thunder Gun variation:
-%localappdata%\Plutonium\storage\t5\mods\999_m14_thundergun
+packages\999
 ```
 
-3. Copy the chosen package into that folder.
-
-For the base version, copy the root `README.md` and `scripts` folder so the layout becomes:
+so the final folder is:
 
 ```text
 %localappdata%\Plutonium\storage\t5\mods\999
-|-- README.md
-|-- scripts
-    |-- sp
-        |-- zom
-            |-- kino_round_999_challenge.gsc
 ```
 
-For the M14 Thunder Gun variation, copy the contents of:
+For the M14 Thunder Gun version, copy:
 
 ```text
-variants\m14-thundergun
+packages\999_m14_thundergun
 ```
 
-so the layout becomes:
+so the final folder is:
 
 ```text
 %localappdata%\Plutonium\storage\t5\mods\999_m14_thundergun
-|-- README.md
-|-- scripts
-    |-- sp
-        |-- zom
-            |-- kino_round_999_challenge.gsc
 ```
 
-4. Start Plutonium T5 Zombies.
+3. Start Plutonium T5 Zombies.
 
-5. Load `999` or `999_m14_thundergun` from the T5 Zombies mod menu, then launch Kino der Toten.
+4. Load `999` or `999_m14_thundergun` from the mod menu, then launch Kino der Toten.
 
-## Avoid Overlap
+## Important: Do Not Double Load
 
-Use one loading method at a time.
+Use one install method at a time.
 
-Do not keep this file active in the loose scripts folder:
+Do not keep this loose script active:
 
 ```text
 %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
@@ -138,7 +134,9 @@ Do not keep this file active in the loose scripts folder:
 
 while also loading `999` or `999_m14_thundergun` from the mod menu.
 
-Also do not install both versions into the same loose script path at the same time. The loose path can only hold one `kino_round_999_challenge.gsc`, so replace it when switching versions.
+Also do not install both packages into the loose scripts folder at the same time. They use the same final filename, so only one can be active there.
+
+Do not copy the whole `kino-round-999-challenge-main` download folder into `mods`. Open `packages` first, then copy only `999` or `999_m14_thundergun`.
 
 ## Restart After Updating
 
@@ -154,45 +152,11 @@ If the change does not appear, use:
 map_restart
 ```
 
-or reload the mod from the Plutonium mod menu if you are using the mod menu install.
+or reload the mod from the Plutonium mod menu if you installed it as a mod.
 
-## What The Base Version Changes
+## Dvars
 
-- Kino only: map name must be `zombie_theater`.
-- Sets the initial round from `/set kr999_target_round`, default `999`.
-- Starts each player with `1,000,000` points by default.
-- Adds a live HUD counter showing actual zombies left this round.
-- Seeds later-round pacing, health, movement speed, and high-round spawn delay.
-- Repairs late-load cases by forcing the correct target-round zombie queue.
-
-For solo round 999, the expected queue is `89,844` zombies, matching BO1's normal round count formula.
-
-## M14 Thunder Gun Variation
-
-The variation in `variants\m14-thundergun` adds these dvars:
-
-```text
-/set kr999_m14_thundergun 1
-/set kr999_m14_thundergun_weapon thundergun_zm
-```
-
-To disable the M14 swap:
-
-```text
-/set kr999_m14_thundergun 0
-```
-
-To make the wallbuy give the upgraded Thunder Gun instead:
-
-```text
-/set kr999_m14_thundergun_weapon thundergun_upgraded_zm
-```
-
-The swap happens after the game gives `m14_zm`, so the normal M14 wallbuy interaction and cost still happen first.
-
-## Console Dvars
-
-Set these before starting or restarting Kino if you want to adjust behavior:
+Base settings:
 
 ```text
 /set kr999_enable 1
@@ -203,7 +167,18 @@ Set these before starting or restarting Kino if you want to adjust behavior:
 /set kr999_show_counter 1
 ```
 
-Keep `kr999_late_repair` on unless you are debugging. It fixes the common case where the script loads just after the round-one spawn loop initialized.
+Extra M14 Thunder Gun settings:
+
+```text
+/set kr999_m14_thundergun 1
+/set kr999_m14_thundergun_weapon thundergun_zm
+```
+
+Use the upgraded Thunder Gun instead:
+
+```text
+/set kr999_m14_thundergun_weapon thundergun_upgraded_zm
+```
 
 ## Notes
 
