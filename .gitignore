@@ -1,0 +1,4 @@
+*.log
+games.log
+*.tmp
+*.bak
