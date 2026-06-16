@@ -26,6 +26,7 @@ kr999_start_once()
 
 	level.kr999_started = true;
 	level thread kr999_boot();
+	level thread kr999_existing_player_watcher();
 	level thread kr999_player_watcher();
 }
 
@@ -103,6 +104,11 @@ kr999_init_dvars()
 	if(GetDvar("kr999_show_counter") == "")
 	{
 		SetDvar("kr999_show_counter", "1");
+	}
+
+	if(GetDvar("kr999_health_cap") == "")
+	{
+		SetDvar("kr999_health_cap", "2000000000");
 	}
 }
 
@@ -206,15 +212,37 @@ kr999_calculate_spawn_delay(target_round)
 kr999_calculate_health(target_round)
 {
 	health = 150;
+	health_cap = GetDvarInt("kr999_health_cap");
+
+	if(health_cap <= 0)
+	{
+		health_cap = 2000000000;
+	}
 
 	for(i = 2; i <= target_round; i++)
 	{
 		if(i >= 10)
 		{
-			health += int(health * 0.1);
+			growth = int(health * 0.1);
+			if(growth < 1)
+			{
+				growth = 1;
+			}
+
+			if(health >= health_cap - growth)
+			{
+				return health_cap;
+			}
+
+			health += growth;
 		}
 		else
 		{
+			if(health >= health_cap - 100)
+			{
+				return health_cap;
+			}
+
 			health = int(health + 100);
 		}
 	}
@@ -227,14 +255,17 @@ kr999_expected_zombies(target_round)
 	max_ai = 24;
 	ai_per_player = 6;
 
-	if(IsDefined(level.zombie_vars["zombie_max_ai"]))
+	if(IsDefined(level.zombie_vars))
 	{
-		max_ai = level.zombie_vars["zombie_max_ai"];
-	}
+		if(IsDefined(level.zombie_vars["zombie_max_ai"]))
+		{
+			max_ai = level.zombie_vars["zombie_max_ai"];
+		}
 
-	if(IsDefined(level.zombie_vars["zombie_ai_per_player"]))
-	{
-		ai_per_player = level.zombie_vars["zombie_ai_per_player"];
+		if(IsDefined(level.zombie_vars["zombie_ai_per_player"]))
+		{
+			ai_per_player = level.zombie_vars["zombie_ai_per_player"];
+		}
 	}
 
 	multiplier = target_round / 5.0;
@@ -429,13 +460,41 @@ kr999_is_normal_zombie(zombie)
 	return true;
 }
 
+kr999_existing_player_watcher()
+{
+	wait 0.05;
+
+	players = get_players();
+	for(i = 0; i < players.size; i++)
+	{
+		player = players[i];
+		if(!IsDefined(player))
+		{
+			continue;
+		}
+
+		player kr999_thread_player_spawned_once();
+	}
+}
+
 kr999_player_watcher()
 {
 	while(true)
 	{
 		level waittill("connected", player);
-		player thread kr999_player_spawned();
+		player kr999_thread_player_spawned_once();
 	}
+}
+
+kr999_thread_player_spawned_once()
+{
+	if(IsDefined(self.kr999_spawn_threaded) && self.kr999_spawn_threaded)
+	{
+		return;
+	}
+
+	self.kr999_spawn_threaded = true;
+	self thread kr999_player_spawned();
 }
 
 kr999_player_spawned()
@@ -466,7 +525,13 @@ kr999_player_spawned()
 			self iPrintLnBold("^2BO1 Round " + target_round + " Challenge loaded");
 			self iPrintLn("Expected zombies: " + kr999_expected_zombies(target_round));
 			self iPrintLn("Live zombies left: " + kr999_get_zombies_remaining());
-			self iPrintLn("Spawn delay: " + level.zombie_vars["zombie_spawn_delay"] + " | Speed seed: " + level.zombie_move_speed);
+			if(IsDefined(level.zombie_vars))
+			{
+				if(IsDefined(level.zombie_vars["zombie_spawn_delay"]) && IsDefined(level.zombie_move_speed))
+				{
+					self iPrintLn("Spawn delay: " + level.zombie_vars["zombie_spawn_delay"] + " | Speed seed: " + level.zombie_move_speed);
+				}
+			}
 		}
 	}
 }

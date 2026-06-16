@@ -91,10 +91,17 @@ Delete the older `kino_round_999_challenge.gsc` file if it exists from a previou
 ## Dvars
 
 ```text
+/set kr999_enable 1
+/set kr999_target_round 999
+/set kr999_start_points 1000000
+/set kr999_show_counter 1
+/set kr999_health_cap 2000000000
 /set kr999_m14_thundergun 1
 /set kr999_m14_thundergun_weapon thundergun_zm
 /set kr999_m14_thundergun_once 1
 ```
+
+`kr999_health_cap` keeps round 999 health math inside the game script integer range.
 
 Disable the M14 swap:
 

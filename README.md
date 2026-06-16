@@ -200,6 +200,7 @@ Base settings:
 /set kr999_late_repair 1
 /set kr999_start_points 1000000
 /set kr999_show_counter 1
+/set kr999_health_cap 2000000000
 ```
 
 Extra M14 Thunder Gun settings:
@@ -219,6 +220,8 @@ Use the upgraded Thunder Gun instead:
 ## Notes
 
 The live zombie counter uses numeric HUD values instead of rebuilding text every update. This avoids config-string overflow during very high-round counts.
+
+Zombie health is capped by `kr999_health_cap` so round 999 math does not overflow the game script integer range.
 
 No Treyarch, Activision, or Plutonium assets are included.
 

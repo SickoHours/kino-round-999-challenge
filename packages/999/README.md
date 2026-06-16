@@ -75,3 +75,15 @@ Use either loose scripts or the mod menu folder, not both at the same time.
 Do not run this base script at the same time as `bo1_round_999_m14_thundergun_challenge.gsc`.
 
 Delete older `kino_round_999_challenge.gsc` or `kino_round_999_base_challenge.gsc` files if they exist from a previous install.
+
+## Useful Dvars
+
+```text
+/set kr999_enable 1
+/set kr999_target_round 999
+/set kr999_start_points 1000000
+/set kr999_show_counter 1
+/set kr999_health_cap 2000000000
+```
+
+`kr999_health_cap` keeps round 999 health math inside the game script integer range.
