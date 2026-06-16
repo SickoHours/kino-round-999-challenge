@@ -1,11 +1,12 @@
 #include maps\_utility;
 #include common_scripts\utility;
 
-// Kino Round 999 Challenge for Plutonium T5 Zombies.
+// BO1 Round 999 Challenge for Plutonium T5 Zombies.
+// M14 Thunder Gun variation.
 // Mod-folder install:
-// %localappdata%\Plutonium\storage\t5\mods\999\scripts\sp\zom\kino_round_999_base_challenge.gsc
+// %localappdata%\Plutonium\storage\t5\mods\999_m14_thundergun\scripts\sp\zom\bo1_round_999_m14_thundergun_challenge.gsc
 // Loose-script install:
-// %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_base_challenge.gsc
+// %localappdata%\Plutonium\storage\t5\scripts\sp\zom\bo1_round_999_m14_thundergun_challenge.gsc
 
 init()
 {
@@ -43,7 +44,7 @@ kr999_boot()
 		wait 0.05;
 	}
 
-	if(GetDvar("mapname") != "zombie_theater")
+	if(!kr999_is_supported_bo1_map(GetDvar("mapname")))
 	{
 		return;
 	}
@@ -104,6 +105,41 @@ kr999_init_dvars()
 	{
 		SetDvar("kr999_show_counter", "1");
 	}
+
+	if(GetDvar("kr999_m14_thundergun") == "")
+	{
+		SetDvar("kr999_m14_thundergun", "1");
+	}
+
+	if(GetDvar("kr999_m14_thundergun_weapon") == "")
+	{
+		SetDvar("kr999_m14_thundergun_weapon", "thundergun_zm");
+	}
+
+	if(GetDvar("kr999_m14_thundergun_once") == "")
+	{
+		SetDvar("kr999_m14_thundergun_once", "1");
+	}
+}
+
+kr999_is_supported_bo1_map(map_name)
+{
+	switch(map_name)
+	{
+		case "zombie_theater":
+		case "zombie_pentagon":
+		case "zombie_cosmodrome":
+		case "zombie_coast":
+		case "zombie_temple":
+		case "zombie_moon":
+		case "zombie_cod5_prototype":
+		case "zombie_cod5_asylum":
+		case "zombie_cod5_sumpf":
+		case "zombie_cod5_factory":
+			return true;
+	}
+
+	return false;
 }
 
 kr999_get_target_round()
@@ -432,7 +468,7 @@ kr999_player_spawned()
 			continue;
 		}
 
-		if(GetDvar("mapname") != "zombie_theater")
+		if(!kr999_is_supported_bo1_map(GetDvar("mapname")))
 		{
 			continue;
 		}
@@ -440,10 +476,15 @@ kr999_player_spawned()
 		self kr999_apply_start_points();
 		self thread kr999_zombie_counter_hud();
 
+		if(GetDvar("mapname") == "zombie_theater")
+		{
+			self thread kr999_m14_thundergun_watcher();
+		}
+
 		if(GetDvarInt("kr999_verbose"))
 		{
 			target_round = kr999_get_target_round();
-			self iPrintLnBold("^2Kino Round " + target_round + " Challenge loaded");
+			self iPrintLnBold("^2BO1 Round " + target_round + " Challenge loaded");
 			self iPrintLn("Expected zombies: " + kr999_expected_zombies(target_round));
 			self iPrintLn("Live zombies left: " + kr999_get_zombies_remaining());
 			self iPrintLn("Spawn delay: " + level.zombie_vars["zombie_spawn_delay"] + " | Speed seed: " + level.zombie_move_speed);
@@ -500,6 +541,47 @@ kr999_apply_start_points()
 	}
 
 	self.kr999_start_points_applied = true;
+}
+
+kr999_m14_thundergun_watcher()
+{
+	self notify("kr999_m14_thundergun_stop");
+	self endon("disconnect");
+	self endon("kr999_m14_thundergun_stop");
+
+	while(true)
+	{
+		if(GetDvarInt("kr999_m14_thundergun") && GetDvar("mapname") == "zombie_theater" && self HasWeapon("m14_zm"))
+		{
+			if(GetDvarInt("kr999_m14_thundergun_once") && IsDefined(self.kr999_m14_thundergun_used) && self.kr999_m14_thundergun_used)
+			{
+				wait 1;
+			}
+			else
+			{
+				reward_weapon = kr999_get_m14_reward_weapon();
+				self TakeWeapon("m14_zm");
+				self maps\_zombiemode_weapons::weapon_give(reward_weapon, undefined, true);
+				self.kr999_m14_thundergun_used = true;
+				self iPrintLnBold("^2M14 wallbuy gave Thunder Gun");
+				wait 1;
+			}
+		}
+
+		wait 0.1;
+	}
+}
+
+kr999_get_m14_reward_weapon()
+{
+	reward_weapon = GetDvar("kr999_m14_thundergun_weapon");
+
+	if(reward_weapon == "")
+	{
+		reward_weapon = "thundergun_zm";
+	}
+
+	return reward_weapon;
 }
 
 kr999_zombie_counter_hud()
