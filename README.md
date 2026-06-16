@@ -131,6 +131,12 @@ so the final folder is:
 
 Use one install method at a time.
 
+Delete this old filename if you still have it from an earlier install:
+
+```text
+%localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
+```
+
 Do not keep this loose script active:
 
 ```text
@@ -187,6 +193,8 @@ Use the upgraded Thunder Gun instead:
 ```
 
 ## Notes
+
+The live zombie counter uses numeric HUD values instead of rebuilding text every update. This avoids config-string overflow during very high-round counts.
 
 No Treyarch, Activision, or Plutonium assets are included.
 

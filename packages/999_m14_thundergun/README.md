@@ -64,6 +64,8 @@ If another version already exists here, replace it:
 %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_m14_thundergun_challenge.gsc
 ```
 
+Delete the older `kino_round_999_challenge.gsc` file if it exists from a previous install.
+
 ## Dvars
 
 ```text

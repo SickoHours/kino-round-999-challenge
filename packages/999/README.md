@@ -58,3 +58,5 @@ Load `999` from the Plutonium T5 Zombies mod menu, then launch Kino.
 Use either loose scripts or the mod menu folder, not both at the same time.
 
 Do not run this base script at the same time as `kino_round_999_m14_thundergun_challenge.gsc`.
+
+Delete the older `kino_round_999_challenge.gsc` file if it exists from a previous install.

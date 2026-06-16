@@ -508,30 +508,24 @@ kr999_zombie_counter_hud()
 	self endon("disconnect");
 	self endon("kr999_counter_hud_stop");
 
-	if(IsDefined(self.kr999_counter_hud))
-	{
-		self.kr999_counter_hud Destroy();
-		self.kr999_counter_hud = undefined;
-	}
+	self kr999_destroy_zombie_counter_hud();
 
 	if(!GetDvarInt("kr999_show_counter"))
 	{
 		return;
 	}
 
-	self.kr999_counter_hud = NewClientHudElem(self);
-	self.kr999_counter_hud.horzAlign = "user_left";
-	self.kr999_counter_hud.vertAlign = "user_top";
-	self.kr999_counter_hud.alignX = "left";
-	self.kr999_counter_hud.alignY = "top";
-	self.kr999_counter_hud.x = 8;
-	self.kr999_counter_hud.y = 92;
-	self.kr999_counter_hud.fontScale = 1.35;
-	self.kr999_counter_hud.foreground = true;
-	self.kr999_counter_hud.hidewheninmenu = false;
-	self.kr999_counter_hud.sort = 100;
-	self.kr999_counter_hud.alpha = 1;
-	self.kr999_counter_hud.color = (0.9, 0.9, 0.9);
+	self.kr999_counter_label = self kr999_create_counter_hud_elem(8, "left");
+	self.kr999_counter_label SetText("Zombies left:");
+
+	self.kr999_counter_remaining = self kr999_create_counter_hud_elem(152, "right");
+	self.kr999_counter_remaining SetValue(0);
+
+	self.kr999_counter_slash = self kr999_create_counter_hud_elem(160, "center");
+	self.kr999_counter_slash SetText("/");
+
+	self.kr999_counter_total = self kr999_create_counter_hud_elem(168, "left");
+	self.kr999_counter_total SetValue(0);
 
 	last_remaining = -1;
 	last_total = -1;
@@ -548,13 +542,19 @@ kr999_zombie_counter_hud()
 
 		if(remaining != last_remaining || total != last_total)
 		{
-			if(total > 0)
+			if(total < 0)
 			{
-				self.kr999_counter_hud SetText("Zombies left: " + remaining + " / " + total);
+				total = 0;
 			}
-			else
+
+			if(remaining != last_remaining)
 			{
-				self.kr999_counter_hud SetText("Zombies left: " + remaining);
+				self.kr999_counter_remaining SetValue(remaining);
+			}
+
+			if(total != last_total)
+			{
+				self.kr999_counter_total SetValue(total);
 			}
 
 			last_remaining = remaining;
@@ -562,6 +562,58 @@ kr999_zombie_counter_hud()
 		}
 
 		wait 0.25;
+	}
+}
+
+kr999_create_counter_hud_elem(x, align_x)
+{
+	hud = NewClientHudElem(self);
+	hud.horzAlign = "user_left";
+	hud.vertAlign = "user_top";
+	hud.alignX = align_x;
+	hud.alignY = "top";
+	hud.x = x;
+	hud.y = 92;
+	hud.fontScale = 1.35;
+	hud.foreground = true;
+	hud.hidewheninmenu = false;
+	hud.sort = 100;
+	hud.alpha = 1;
+	hud.color = (0.9, 0.9, 0.9);
+
+	return hud;
+}
+
+kr999_destroy_zombie_counter_hud()
+{
+	if(IsDefined(self.kr999_counter_hud))
+	{
+		self.kr999_counter_hud Destroy();
+		self.kr999_counter_hud = undefined;
+	}
+
+	if(IsDefined(self.kr999_counter_label))
+	{
+		self.kr999_counter_label Destroy();
+		self.kr999_counter_label = undefined;
+	}
+
+	if(IsDefined(self.kr999_counter_remaining))
+	{
+		self.kr999_counter_remaining Destroy();
+		self.kr999_counter_remaining = undefined;
+	}
+
+	if(IsDefined(self.kr999_counter_slash))
+	{
+		self.kr999_counter_slash Destroy();
+		self.kr999_counter_slash = undefined;
+	}
+
+	if(IsDefined(self.kr999_counter_total))
+	{
+		self.kr999_counter_total Destroy();
+		self.kr999_counter_total = undefined;
 	}
 }
 
