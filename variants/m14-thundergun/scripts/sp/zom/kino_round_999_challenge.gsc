@@ -2,8 +2,9 @@
 #include common_scripts\utility;
 
 // Kino Round 999 Challenge for Plutonium T5 Zombies.
+// M14 Thunder Gun variation.
 // Mod-folder install:
-// %localappdata%\Plutonium\storage\t5\mods\999\scripts\sp\zom\kino_round_999_challenge.gsc
+// %localappdata%\Plutonium\storage\t5\mods\999_m14_thundergun\scripts\sp\zom\kino_round_999_challenge.gsc
 // Loose-script install:
 // %localappdata%\Plutonium\storage\t5\scripts\sp\zom\kino_round_999_challenge.gsc
 
@@ -103,6 +104,16 @@ kr999_init_dvars()
 	if(GetDvar("kr999_show_counter") == "")
 	{
 		SetDvar("kr999_show_counter", "1");
+	}
+
+	if(GetDvar("kr999_m14_thundergun") == "")
+	{
+		SetDvar("kr999_m14_thundergun", "1");
+	}
+
+	if(GetDvar("kr999_m14_thundergun_weapon") == "")
+	{
+		SetDvar("kr999_m14_thundergun_weapon", "thundergun_zm");
 	}
 }
 
@@ -439,6 +450,7 @@ kr999_player_spawned()
 
 		self kr999_apply_start_points();
 		self thread kr999_zombie_counter_hud();
+		self thread kr999_m14_thundergun_watcher();
 
 		if(GetDvarInt("kr999_verbose"))
 		{
@@ -500,6 +512,39 @@ kr999_apply_start_points()
 	}
 
 	self.kr999_start_points_applied = true;
+}
+
+kr999_m14_thundergun_watcher()
+{
+	self notify("kr999_m14_thundergun_stop");
+	self endon("disconnect");
+	self endon("kr999_m14_thundergun_stop");
+
+	while(true)
+	{
+		if(GetDvarInt("kr999_m14_thundergun") && GetDvar("mapname") == "zombie_theater" && self HasWeapon("m14_zm"))
+		{
+			reward_weapon = kr999_get_m14_reward_weapon();
+			self TakeWeapon("m14_zm");
+			self maps\_zombiemode_weapons::weapon_give(reward_weapon, undefined, true);
+			self iPrintLnBold("^2M14 wallbuy gave Thunder Gun");
+			wait 1;
+		}
+
+		wait 0.1;
+	}
+}
+
+kr999_get_m14_reward_weapon()
+{
+	reward_weapon = GetDvar("kr999_m14_thundergun_weapon");
+
+	if(reward_weapon == "")
+	{
+		reward_weapon = "thundergun_zm";
+	}
+
+	return reward_weapon;
 }
 
 kr999_zombie_counter_hud()
