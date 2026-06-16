@@ -7,7 +7,8 @@ Kino round 999 challenge with an M14 Thunder Gun twist.
 - Starts Kino der Toten on round 999.
 - Gives each player 1,000,000 points.
 - Shows a live zombie counter.
-- Buying/acquiring `m14_zm` immediately swaps it into `thundergun_zm`.
+- The first time each player buys/acquires `m14_zm`, it immediately swaps into `thundergun_zm`.
+- Later M14 buys stay as the regular M14 by default.
 
 ## Loose Scripts Install
 
@@ -71,12 +72,19 @@ Delete the older `kino_round_999_challenge.gsc` file if it exists from a previou
 ```text
 /set kr999_m14_thundergun 1
 /set kr999_m14_thundergun_weapon thundergun_zm
+/set kr999_m14_thundergun_once 1
 ```
 
 Disable the M14 swap:
 
 ```text
 /set kr999_m14_thundergun 0
+```
+
+Allow repeated Thunder Gun buys:
+
+```text
+/set kr999_m14_thundergun_once 0
 ```
 
 Use the upgraded Thunder Gun:

@@ -41,7 +41,7 @@ Base round 999 challenge. Starts Kino on round 999, gives 1,000,000 points, and 
 
 `999_m14_thundergun`
 
-Everything from `999`, plus buying/acquiring the spawn-room M14 immediately gives you the Thunder Gun.
+Everything from `999`, plus each player gets one Thunder Gun from the spawn-room M14.
 
 ## File Names
 
@@ -184,6 +184,7 @@ Extra M14 Thunder Gun settings:
 ```text
 /set kr999_m14_thundergun 1
 /set kr999_m14_thundergun_weapon thundergun_zm
+/set kr999_m14_thundergun_once 1
 ```
 
 Use the upgraded Thunder Gun instead:

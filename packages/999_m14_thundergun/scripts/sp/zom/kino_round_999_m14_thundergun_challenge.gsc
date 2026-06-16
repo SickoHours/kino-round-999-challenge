@@ -115,6 +115,11 @@ kr999_init_dvars()
 	{
 		SetDvar("kr999_m14_thundergun_weapon", "thundergun_zm");
 	}
+
+	if(GetDvar("kr999_m14_thundergun_once") == "")
+	{
+		SetDvar("kr999_m14_thundergun_once", "1");
+	}
 }
 
 kr999_get_target_round()
@@ -524,11 +529,19 @@ kr999_m14_thundergun_watcher()
 	{
 		if(GetDvarInt("kr999_m14_thundergun") && GetDvar("mapname") == "zombie_theater" && self HasWeapon("m14_zm"))
 		{
-			reward_weapon = kr999_get_m14_reward_weapon();
-			self TakeWeapon("m14_zm");
-			self maps\_zombiemode_weapons::weapon_give(reward_weapon, undefined, true);
-			self iPrintLnBold("^2M14 wallbuy gave Thunder Gun");
-			wait 1;
+			if(GetDvarInt("kr999_m14_thundergun_once") && IsDefined(self.kr999_m14_thundergun_used) && self.kr999_m14_thundergun_used)
+			{
+				wait 1;
+			}
+			else
+			{
+				reward_weapon = kr999_get_m14_reward_weapon();
+				self TakeWeapon("m14_zm");
+				self maps\_zombiemode_weapons::weapon_give(reward_weapon, undefined, true);
+				self.kr999_m14_thundergun_used = true;
+				self iPrintLnBold("^2M14 wallbuy gave Thunder Gun");
+				wait 1;
+			}
 		}
 
 		wait 0.1;
