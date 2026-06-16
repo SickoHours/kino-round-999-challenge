@@ -2,7 +2,7 @@
 #include common_scripts\utility;
 
 // Kino Round 999 Challenge for Plutonium T5 Zombies.
-// Install to: %localappdata%\Plutonium\storage\t5\scripts\sp\zom
+// Install to: %localappdata%\Plutonium\storage\t5\mods\999
 
 init()
 {
